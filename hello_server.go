@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/moby/moby"
+	"github.com/docker/docker/client"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
