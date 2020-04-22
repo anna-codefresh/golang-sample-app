@@ -8,9 +8,11 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+	"fmt"
 
 	"github.com/gorilla/mux"
 	"github.com/docker/docker/client"
+	"github.com/docker/docker/api/types"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -28,6 +30,21 @@ func CreateGreeting(name string) string {
 }
 
 func main() {
+
+	cli, err := client.NewEnvClient()
+	if err != nil {
+    		panic(err)
+    }
+
+	containers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{})
+    	if err != nil {
+    		panic(err)
+    	}
+
+    for _, container := range containers {
+    		fmt.Printf("%s %s\n", container.ID[:10], container.Image)
+    	}
+
 	// Create Server and Route Handlers
 	r := mux.NewRouter()
 
