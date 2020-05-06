@@ -3,3 +3,4 @@ golang-sample-app
 out/
 vendor/
 _vendor-*
+.idea
